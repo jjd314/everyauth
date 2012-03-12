@@ -80,7 +80,6 @@ everyauth.middleware = function () {
         if (!auth || !auth.userId) return next();
         var everymodule = everyauth.everymodule;
         var pause = __pause(req);
-
         var findUserById_callback = function (err, user) {
           if (err) {
             pause.resume();
