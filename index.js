@@ -39,7 +39,7 @@ everyauth.middleware = function () {
         everymodule = everyauth.everymodule;
         if (!everymodule._findUserById) return next();
         var pause = __pause(req);
-        everymodule._findUserById(auth.userId, function (err, user) {
+        everymodule._findUserById(auth.userId, req, function (err, user) {
           if (err) throw err; // TODO Leverage everyauth's error handling
           if (user) req.user = user;
           else delete sess.auth;
