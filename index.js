@@ -89,7 +89,6 @@ everyauth.middleware = function (expressApp) {
       findUserById_function.length === 3
         ? findUserById_function( req, auth.userId, findUserById_callback )
         : findUserById_function(      auth.userId, findUserById_callback );
-
     })
     .use(app.router)
 
