@@ -46,10 +46,6 @@ everyauth.middleware = function (expressApp) {
       next();
     });
 
-    expressApp.use( function (req, res, next) {
-      res.locals[userAlias] = req.user;
-      next();
-    });
   }
 
   var app = express();
@@ -78,7 +74,10 @@ everyauth.middleware = function (expressApp) {
           pause.resume();
           return next(err);
         }
-        if (user) req.user = user;
+        if (user) {
+          req.user = user;
+          res.locals[userAlias] = req.user;
+        }
         else delete sess.auth;
         next();
         pause.resume();
@@ -101,6 +100,15 @@ everyauth.middleware = function (expressApp) {
   }
 
   app.everyauth = true;
+
+  if(expressApp) {
+    app.use(function(req, res, next) {
+      for(var _name in expressApp.locals) {
+        app.locals[_name] = expressApp.locals[_name];
+      }
+      next();
+    });
+  }
 
   return app;
 };
