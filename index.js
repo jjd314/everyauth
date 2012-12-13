@@ -39,6 +39,7 @@ everyauth.middleware = function (expressApp) {
         ea.password || (ea.password = {});
         ea.password.loginFormFieldName = everyauth.password.loginFormFieldName();
         ea.password.passwordFormFieldName = everyauth.password.passwordFormFieldName();
+        ea.password.confirmFormFieldName = everyauth.password.confirmFormFieldName();
       }
       ea.user = req.user;
 
